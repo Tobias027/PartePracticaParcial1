@@ -1,0 +1,114 @@
+@startuml
+class Hospital {
+    -nombre: String
+    -direccion: String
+    +getNombre(): String
+    +getDireccion(): String
+}
+
+class Area {
+    -nombre: String
+    -numeroPiso: int
+    -tipo: TipoArea
+    +getHabitaciones(): List<Habitacion>
+    +hayCapacidadDisponible(): boolean
+}
+
+class AdministracionArea {
+    -area: TipoArea
+    +autorizarTraslado(Traslado): boolean
+}
+
+class Habitacion {
+    -numeroHabitacion: int
+    -capacidadCamas: int
+    -camasOcupadas: int
+    +getCamasDisponibles(): int
+    +asignarCama(): boolean
+    +liberarCama(): void
+}
+
+abstract class Persona {
+    -nombreCompleto: String
+    -numeroDocumento: String
+    -fechaNacimiento: Date
+    +getNombreCompleto(): String
+    +getNumeroDocumento(): String
+}
+
+class Paciente extends Persona {
+    -numeroPaciente: int
+    -fechaIngreso: Date
+    -diagnosticoInicial: String
+    +getPacienteInfo(): String
+}
+
+class Colaborador extends Persona {
+    -numeroLegajo: int
+    -especialidad: Especialidad
+    -fechaIngreso: Date
+    +getEspecialidad(): String
+    +getLegajo(): int
+}
+
+class Internacion {
+    -fechaInicio: Date
+    -fechaFin: Date
+    -diagnostico: String
+    +finalizarInternacion(): void
+    +actualizarDiagnostico(String): void
+    +asignarColaborador(Colaborador): void
+    +solicitarTraslado(Area, String): Traslado
+    +getHabitacionActual(): Area
+}
+
+class Traslado {
+    -fechaTraslado: Date
+    -motivo: String
+    -observaciones: String
+    -autorizado: boolean
+    +autorizar(): void
+    +getInformacionTraslado(): String
+}
+
+class Atencion {
+    -fechaAtencion: Date
+    -tipoAtencion: String
+    -observaciones: String
+    -duracion: int
+    +registrarAtencion(): void
+    +finalizarAtencion(): void
+}
+
+enum TipoArea {
+    EMERGENCIAS
+    CLINICA_MEDICA
+    PEDIATRIA
+    CIRUGIA
+}
+
+enum Especialidad {
+    MEDICO_DE_EMERGENCIAS
+    MEDICO_CLINICO
+    PEDIATRA
+    CIRUJANO
+}
+
+
+' Relaciones mejoradas
+Hospital ||--o{ Area : "administra"
+Area ||--o{ Habitacion : "contiene"
+Area ||--|| AdministracionArea : "gestionada por"
+Paciente ||--o{ Internacion : "tiene"
+Internacion }o--|| Paciente : "de"
+Internacion }o--|| Colaborador : "atendida por"
+Internacion }o--|| Habitacion : "ubicada en"
+Internacion ||--o{ Traslado : "genera"
+Traslado }o--|| Area : "origen"
+Traslado }o--|| Area : "destino"
+AdministracionArea ||--o{ Traslado : "autoriza"
+Colaborador ||--o{ Atencion : "proporciona"
+Paciente ||--o{ Atencion : "recibe"
+Atencion }o--|| Internacion : "durante"
+
+@enduml

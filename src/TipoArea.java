@@ -1,0 +1,6 @@
+enum TipoArea {
+    EMERGENCIAS,
+    CLINICA_MEDICA,
+    PEDIATRIA,
+    CIRUGIA
+}
