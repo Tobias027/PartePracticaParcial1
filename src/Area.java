@@ -5,18 +5,20 @@ public class Area {
     private int numeroPiso;
     private TipoArea tipo;
     private ArrayList<Habitacion> habitaciones;
-    private AdministracionArea administracionArea;
 
     public Area(String nombre, int numeroPiso, TipoArea tipo) {
         this.nombre = nombre;
         this.numeroPiso = numeroPiso;
         this.tipo = tipo;
         this.habitaciones = new ArrayList<>();
-        this.administracionArea = new AdministracionArea(tipo);
     }
 
     public ArrayList<Habitacion> getHabitaciones() {
         return this.habitaciones;
+    }
+
+    public String getNombre(){
+        return this.nombre;
     }
 
     public boolean hayCapacidadDisponible() {
@@ -32,7 +34,4 @@ public class Area {
         habitaciones.add(habitacion);
     }
 
-    public AdministracionArea getAdministracionArea() {
-        return administracionArea;
-    }
 }

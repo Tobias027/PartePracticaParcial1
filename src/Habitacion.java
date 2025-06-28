@@ -3,20 +3,19 @@ import java.util.*;
 
 public class Habitacion {
     private int numeroHabitacion;
-    private TipoArea area;
+    private Area area;
     private int capacidadCamas;
     private int camasOcupadas;
-    private ArrayList<Internacion> internaciones;
 
-    public Habitacion(int numeroHabitacion, int capacidadCamas, TipoArea area) {
+    public Habitacion(int numeroHabitacion, int capacidadCamas, Area area) {
         this.numeroHabitacion = numeroHabitacion;
         this.area=area;
         this.capacidadCamas = capacidadCamas;
         this.camasOcupadas = 0;
-        this.internaciones = new ArrayList<>();
     }
 
     public int getCamasDisponibles() {
+
         return capacidadCamas - camasOcupadas;
     }
 
@@ -35,14 +34,17 @@ public class Habitacion {
     }
 
     public int getNumeroHabitacion() {
+
         return numeroHabitacion;
     }
 
-    public TipoArea getArea() {
+    public Area getArea() {
+
         return this.area;
     }
 
-    public void agregarInternacion(Internacion internacion) {
-        internaciones.add(internacion);
+
+    public String getHabitacionInfo() {
+        return "Habitacion: " + numeroHabitacion + ", Camas ocupadas: " + camasOcupadas;
     }
 }

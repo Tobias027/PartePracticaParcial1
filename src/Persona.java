@@ -2,10 +2,10 @@ import java.time.LocalDate;
 
 abstract class Persona {
     protected String nombreCompleto;
-    protected String numeroDocumento;
+    protected int numeroDocumento;
     protected LocalDate fechaNacimiento;
 
-    public Persona(String nombreCompleto, String numeroDocumento, LocalDate fechaNacimiento) {
+    public Persona(String nombreCompleto, int numeroDocumento, LocalDate fechaNacimiento) {
         this.nombreCompleto = nombreCompleto;
         this.numeroDocumento = numeroDocumento;
         this.fechaNacimiento = fechaNacimiento;
@@ -15,7 +15,7 @@ abstract class Persona {
         return nombreCompleto;
     }
 
-    public String getNumeroDocumento() {
+    public int getNumeroDocumento() {
         return numeroDocumento;
     }
 }

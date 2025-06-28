@@ -11,19 +11,20 @@ class Area {
     -numeroPiso: int
     -tipo: TipoArea
     +getHabitaciones(): List<Habitacion>
+    +getAdministracion(): AdministracionArea
     +hayCapacidadDisponible(): boolean
-}
-
-class AdministracionArea {
-    -area: TipoArea
-    +autorizarTraslado(Traslado): boolean
+    +agregarHabitacion(Habitacion habitacion): void
 }
 
 class Habitacion {
     -numeroHabitacion: int
+    -area: Area
     -capacidadCamas: int
     -camasOcupadas: int
+    +getNumeroHabitacion(): int
     +getCamasDisponibles(): int
+    +getArea(): Area
+    +getHabitacionInfo(): String
     +asignarCama(): boolean
     +liberarCama(): void
 }
@@ -41,6 +42,8 @@ class Paciente extends Persona {
     -fechaIngreso: Date
     -diagnosticoInicial: String
     +getPacienteInfo(): String
+    +agregarInternacion(Internacion internacion): void
+    +agregarAtencion(Atencion atencion);
 }
 
 class Colaborador extends Persona {
@@ -58,8 +61,10 @@ class Internacion {
     +finalizarInternacion(): void
     +actualizarDiagnostico(String): void
     +asignarColaborador(Colaborador): void
-    +solicitarTraslado(Area, String): Traslado
-    +getHabitacionActual(): Area
+    +solicitarTraslado(Area areaDestino, String motivo, String observaciones): Traslado
+    +verificarTraslado(Traslado traslado): void
+    +getHabitacionActual(): int
+    +getInfoInternacion(): void
 }
 
 class Traslado {
@@ -78,6 +83,9 @@ class Atencion {
     -duracion: int
     +registrarAtencion(): void
     +finalizarAtencion(): void
+    +getInternacion(): Internacion
+    +getColaborador(): Colaborador
+    +getPaciente(): Paciente
 }
 
 enum TipoArea {
@@ -98,7 +106,6 @@ enum Especialidad {
 ' Relaciones mejoradas
 Hospital ||--o{ Area : "administra"
 Area ||--o{ Habitacion : "contiene"
-Area ||--|| AdministracionArea : "gestionada por"
 Paciente ||--o{ Internacion : "tiene"
 Internacion }o--|| Paciente : "de"
 Internacion }o--|| Colaborador : "atendida por"
@@ -109,6 +116,6 @@ Traslado }o--|| Area : "destino"
 AdministracionArea ||--o{ Traslado : "autoriza"
 Colaborador ||--o{ Atencion : "proporciona"
 Paciente ||--o{ Atencion : "recibe"
-Atencion }o--|| Internacion : "durante"
+Atencion "1" -- "1" Internacion : asociada
 
 @enduml

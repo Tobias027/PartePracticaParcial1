@@ -8,7 +8,7 @@ public class Paciente extends Persona {
     private List<Internacion> internaciones;
     private List<Atencion> atenciones;
 
-    public Paciente(String nombreCompleto, String numeroDocumento, LocalDate fechaNacimiento,
+    public Paciente(String nombreCompleto, int numeroDocumento, LocalDate fechaNacimiento,
                     int numeroPaciente, LocalDate fechaIngreso, String diagnosticoInicial) {
         super(nombreCompleto, numeroDocumento, fechaNacimiento);
         this.numeroPaciente = numeroPaciente;

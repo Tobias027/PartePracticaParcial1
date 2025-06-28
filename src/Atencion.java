@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.util.*;
 
 public class Atencion {
     private LocalDate fechaAtencion;
@@ -10,15 +9,16 @@ public class Atencion {
     private Paciente paciente;
     private Internacion internacion;
 
-    public Atencion(LocalDate fechaAtencion, String tipoAtencion, String observaciones,
+    public Atencion(LocalDate localDate, String tipoAtencion, String observaciones,
                     int duracion, Colaborador colaborador, Paciente paciente) {
-        this.fechaAtencion = fechaAtencion;
+        this.fechaAtencion = LocalDate.now();
         this.tipoAtencion = tipoAtencion;
         this.observaciones = observaciones;
         this.duracion = duracion;
         this.colaborador = colaborador;
         this.paciente = paciente;
         this.internacion = null;
+        agregarAtencion(colaborador, paciente);
     }
 
     public void registrarAtencion() {
@@ -29,14 +29,32 @@ public class Atencion {
         if (paciente != null) {
             paciente.agregarAtencion(this);
         }
-        if (internacion != null) {
-            internacion.agregarAtencion(this);
-        }
     }
 
     public void finalizarAtencion() {
         System.out.println("Atención finalizada: " + tipoAtencion + " - Duración: " + duracion + " minutos");
     }
 
-    public void gestionarInternacion()
+    public Internacion getInternacion() {
+        return internacion;
+    }
+
+    public Colaborador getColaborador() {
+        return colaborador;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void agregarAtencion(Colaborador colaborador, Paciente paciente){
+        colaborador.agregarAtencion(this);
+        paciente.agregarAtencion(this);
+
+    }
+
+    public void asociarInternacion(LocalDate fechaInicio, String diagnostico, Paciente paciente,
+                                     Colaborador colaborador, Habitacion habitacion){
+        this.internacion= new Internacion(diagnostico, paciente, colaborador, habitacion);
+    }
 }

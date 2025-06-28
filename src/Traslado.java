@@ -20,7 +20,23 @@ public class Traslado {
     }
 
     public String getInformacionTraslado() {
-        return "Traslado - Fecha: " + fechaTraslado + ", Motivo: " + motivo +
-                ", Autorizado: " + autorizado + ", Observaciones: " + observaciones;
+        return "=== Información del Traslado ===\n"
+                + " Fecha de Traslado: " + fechaTraslado + "\n"
+                + " Motivo: " + motivo + "\n"
+                + " Observaciones: " + observaciones + "\n"
+                + " Autorizado: " + (autorizado ? "Sí" : "No") + "\n"
+                + " Área de Origen: " + (areaOrigen != null ? areaOrigen.getNombre() : "No especificada") + "\n"
+                + "️ Área de Destino: " + (areaDestino != null ? areaDestino.getNombre() : "No especificada");
     }
+
+
+    public void autorizar(){
+        this.autorizado=true;
+    }
+
+    public boolean isAutorizado() {
+        return autorizado;
+    }
+
+
 }

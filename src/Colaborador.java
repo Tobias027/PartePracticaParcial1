@@ -8,7 +8,7 @@ public class Colaborador extends Persona {
     private ArrayList<Internacion> internacionesAtendidas;
     private ArrayList<Atencion> atencionesRealizadas;
 
-    public Colaborador(String nombreCompleto, String numeroDocumento, LocalDate fechaNacimiento,
+    public Colaborador(String nombreCompleto, int numeroDocumento, LocalDate fechaNacimiento,
                        int numeroLegajo, Especialidad especialidad, LocalDate fechaIngreso) {
         super(nombreCompleto, numeroDocumento, fechaNacimiento);
         this.numeroLegajo = numeroLegajo;
@@ -32,5 +32,10 @@ public class Colaborador extends Persona {
 
     public void agregarAtencion(Atencion atencion) {
         atencionesRealizadas.add(atencion);
+    }
+
+    public String getColaboradorInfo() {
+        return "Colaborador: " + nombreCompleto + ", Número: " + numeroLegajo +
+                ", Especialidad: : " + especialidad ;
     }
 }
